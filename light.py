@@ -16,3 +16,4 @@ if timeOfDay=="NIGHT":
 elif timeOfDay=="DAY":
 	GPIO.output(18,GPIO.LOW);
 	print ("Light has been switched off")
+

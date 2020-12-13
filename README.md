@@ -20,9 +20,9 @@ The cron daemon is used to monitor when the sun has risen or set.
 
 crontab entries:
 
-5 * * * * sunwait sun up 51.886661N 8.618732W ; python /home/pi/development/smart-lighting-app/light.py DAY
+*/5 * * * * sunwait sun up 51.886661N 8.618732W ; python /home/pi/development/smart-lighting-app/light.py DAY
 
-5 * * * * sunwait sun down 51.886661N 8.618732W ; python /home/pi/development/smart-lighting-app/light.py NIGHT
+*/5 * * * * sunwait sun down 51.886661N 8.618732W ; python /home/pi/development/smart-lighting-app/light.py NIGHT
 
 Tools, Technologies and Equipment:
 

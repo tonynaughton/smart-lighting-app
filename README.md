@@ -24,12 +24,23 @@ crontab entries:
 
 */5 * * * * sunwait sun down 51.886661N 8.618732W ; python /home/pi/development/smart-lighting-app/light.py NIGHT
 
+<h2>Flask Server</h2>
+
+A Flask server runs on the Raspberry Pi and hosts an interactive web page which allows a user located in the LAN to switch the LED on or off.
+
+Interacting with button on index.html sends a HTTP Post request using AJAX.
+
+This request calls the ‘led_on’ or ‘led_off’ function which changes the state of the LED.
+
 Tools, Technologies and Equipment:
 
 - Raspberry Pi 3 Model B+
 - LED (simulates the light)
 - Tactile push button
 - Sunwait
-- Thingspeak
+- Flask framework
 - Python
+- HTML
+- AJAX
+- Thingspeak
 - cron

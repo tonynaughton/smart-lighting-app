@@ -1,5 +1,3 @@
-#Script for controlling the LED based on the time of day
-
 from gpiozero import LED
 from time import sleep
 

@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<meta name="viewport" content="width=device-width" />
 	<title>The Smart Lighting App</title>
 </head>
 <body>
 
-<h1>Welcome to The Smart Lighting App</h1>
+<div class="container">
 
-<p>Click on the button below to switch on/off the light!</p>
+   <h1>Welcome to The Smart Lighting App</h1>
 
-<button id="onButton" type="button">Turn on the light</button>
-<button id="offButton" type="button">Turn off the light</button>
+   <p>Click on the light bulb to switch the light on/off!</p>
+
+   <a href="#" id="lightButton" onclick="changeImage()">
+      <img src="https://drive.google.com/uc?export=view&id=1U8ApYAxTMX_Xne4j9HSyHhtZM2L6WqDt" alt="light-bulb" id="light_image">
+   </a>
+
+</div>
 
 <script>
 
-	$('#onButton').click(function() {
+    $('#lightButton').click(function() {
         $.ajax({
               type:'POST',
-              url: "{{ url_for('led_on')}}",
+              url: "{{ url_for('led_toggle')}}",
               dataType:"text",
               success: function(response){
                  console.log(response);
@@ -28,19 +33,36 @@
       });
     });
 
-    $('#offButton').click(function() {
-        $.ajax({
-              type:'POST',
-              url: "{{ url_for('led_off')}}",
-              dataType:"text",
-              success: function(response){
-                 console.log(response);
-                 alert(response);
-              }
-      });
-    });
+    function changeImage() {
+       if (document.getElementById("light_image").src == "https://drive.google.com/uc?export=view&id=1U8ApYAxTMX_Xne4j9HSyHhtZM2L6WqDt") {
+         document.getElementById("light_image").src = "https://drive.google.com/uc?export=view&id=1UN7wxIicAYNGugeSSQ6MstkM6d1FqfRy"
+       }
+       else {
+         document.getElementById("light_image").src = "https://drive.google.com/uc?export=view&id=1U8ApYAxTMX_Xne4j9HSyHhtZM2L6WqDt"
+       }
+    }
     
 </script>
+
+<style>
+
+   body {
+      background-color: #f8f8ff;
+      font-family: sans-serif;
+   }
+
+   .container {
+      max-width: 1000px;
+      text-align: center;
+      margin: auto;
+   }
+
+   #light_image {
+      max-width: 300px;
+      height: auto;
+   }
+
+</style>
 
 </body>
 </html>

@@ -5,5 +5,5 @@ led = LED(18)
 
 while True:
     led.off()
-    print ("Light has been switched off")
-    sleep(0.5)
+    print ("The light is switched OFF")
+    sleep(300.0)

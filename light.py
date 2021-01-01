@@ -1,3 +1,7 @@
+#!/usr/bin/python3
+
+# Script which cpntains functions for changing state of LED
+
 from gpiozero import LED
 from time import sleep
 

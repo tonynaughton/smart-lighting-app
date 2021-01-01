@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import light
 from flask import Flask, render_template
 from gpiozero import Button, LED
@@ -9,6 +11,7 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+# Route which calls the light_switch function for changing state of LED
 @app.route('/led_toggle', methods=['POST'])
 def led_toggle():
     light.light_switch()

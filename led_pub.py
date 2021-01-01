@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 
+# Script used as MQTT publisher to change state of LED
+
 import paho.mqtt.client as mqtt
 from urllib.parse import urlparse
 import sys

@@ -1,3 +1,7 @@
+#!/usr/bin/python3
+
+# Script used for changing state of LED using tacticle push button
+
 import light
 from gpiozero import Button
 from time import sleep

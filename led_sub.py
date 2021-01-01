@@ -1,24 +1,23 @@
 #!/usr/bin/python3
 
+# Script used as MQTT subscriber to change state of LED
+
+import light
 import paho.mqtt.client as mqtt
 from urllib.parse import urlparse
 from gpiozero import LED
 import sys
-
-#Setting an LED pin to 'led' variable
-led = LED(18)
 
 # Define event callbacks
 def on_connect(client, userdata, flags, rc):
     print("Connection Result: " + str(rc))
 
 def on_message(client, obj, msg):
-    print("Payload:" + str(msg.payload))
     # If statements which change state of LED depending on message payload
     if msg.payload == b"ON":
-        led.on()
+        light.light_on()
     if msg.payload == b"OFF":
-        led.off()
+        light.light_off()
 
 def on_subscribe(client, obj, mid, granted_qos):
     print("Subscribed, QOS granted: "+ str(granted_qos))

@@ -15,6 +15,8 @@
 
    <p>Click on the light bulb to switch the light on/off!</p>
 
+   <!-- Link which changes image source when clicked -->
+
    <a href="#" id="lightButton" onclick="changeImage()">
       <img src="https://drive.google.com/uc?export=view&id=1U8ApYAxTMX_Xne4j9HSyHhtZM2L6WqDt" alt="light-bulb" id="light_image">
    </a>
@@ -22,6 +24,8 @@
 </div>
 
 <script>
+
+   // AJAX used to route to 'led_toggle' when lightButton image is clicked on
 
     $('#lightButton').click(function() {
         $.ajax({
@@ -34,6 +38,8 @@
               }
       });
     });
+
+   //  function which changes the image displayed when light_image is clicked on
 
     function changeImage() {
        if (document.getElementById("light_image").src == "https://drive.google.com/uc?export=view&id=1U8ApYAxTMX_Xne4j9HSyHhtZM2L6WqDt") {
@@ -54,7 +60,6 @@
    }
 
    .container {
-      max-width: 1000px;
       text-align: center;
       margin-left: 10%;
       margin-right: 10%;

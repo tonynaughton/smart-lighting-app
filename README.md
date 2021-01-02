@@ -4,13 +4,13 @@ Student Name: Tony Naughton
 
 Student ID: 20091454
 
-The Smart Lighting App is designed to control home lighting in an efficient manner. The app provides several methods for switching on/off lighting, through manual and automated processes. For demonstrative purposes, an LED will be used to simulate the lighting.
+The Smart Lighting App is designed to control home lighting efficiently. The app provides several methods for switching on/off lighting, through manual and automated processes. For demonstrative purposes, an LED will be used to simulate the lighting.
 
 There are <b>four</b> methods the LED can be switched on/off:
-1. Interacting with a physical tacticle on/off button which is wired to the Raspberry Pi.
+1. Interacting with a physical tactile on/off button which is wired to the Raspberry Pi.
 2. Interacting with a virtual on/off button on a webpage.
 3. The LED will switch on as when the sun sets, and switch off when the sun has risen.
-4. Uisng MQTT protocol to switch the LED on/off
+4. Using MQTT protocol to switch the LED on/off
 
 <h2>Tools, Technologies and Equipment:</h2>
 
@@ -40,7 +40,7 @@ When the image is clicked on, AJAX routes to the led_toggle function which sends
 <h2>Sunset/Sunrise:</h2>
 
 The level of natural light that in a room will vary all year round as the sun is rising and setting at different times each day.
-As a result, the period each day for when artificial light is required will vary.
+As a result, the period each day when artificial light is required will vary.
 The time of the sunrise and sunset are found using a pre-existing program called 'Sunwait' (https://github.com/risacher/sunwait).
 Cron jobs are used to monitor when the sun has risen or set.
 

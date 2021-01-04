@@ -4,6 +4,8 @@ Student Name: Tony Naughton
 
 Student ID: 20091454
 
+Demo video: https://www.youtube.com/watch?v=fsvllqIeayk
+
 The Smart Lighting App is designed to control home lighting efficiently. The app provides several methods for switching on/off lighting, through manual and automated processes. For demonstrative purposes, an LED will be used to simulate the lighting.
 
 There are <b>four</b> methods the LED can be switched on/off:

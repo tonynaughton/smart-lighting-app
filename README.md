@@ -1,59 +1,90 @@
-<h1>The Smart Lighting App</h1>
+# Smart Lighting App
 
-Student Name: Tony Naughton
+Smart Lighting App is an IoT app designed to control home lighting from multiple inputs. The app provides several methods for switching on/off lighting, through manual and automated processes. The app runs on a Raspberry Pi and for prototyping purposes, an LED will be used to simulate the lighting.
 
-Student ID: 20091454
+Four methods the LED can be switched on/off:
 
-Demo video: https://www.youtube.com/watch?v=fsvllqIeayk
+- Tactile on/off button
+- Virtual on/off button (hosted on Flask server)
+- LED switches on/off in accordance with sunset/sunrise
+- MQTT Protocol
 
-The Smart Lighting App is designed to control home lighting efficiently. The app provides several methods for switching on/off lighting, through manual and automated processes. For demonstrative purposes, an LED will be used to simulate the lighting.
+#### Tactile button:
 
-There are <b>four</b> methods the LED can be switched on/off:
-1. Interacting with a physical tactile on/off button which is wired to the Raspberry Pi.
-2. Interacting with a virtual on/off button on a webpage.
-3. The LED will switch on as when the sun sets, and switch off when the sun has risen.
-4. Using MQTT protocol to switch the LED on/off
+A tactile button is wired up to the Raspberry Pi. When the button is pressed, the state of the LED is changed through `button.py`.
 
-<h2>Tools, Technologies and Equipment:</h2>
+#### Virtual button:
 
-- Raspberry Pi 3 Model B+
-- LED
-- Tactile push button
-- Sunwait
-- HTTP
-- MQTT
-- Flask
-- Python
-- HTML
-- CSS
-- AJAX
-- Cron
+A Flask server running on the Raspberry Pi hosts `index.html` which contains a light bulb image. When the image is clicked on, AJAX routes to `led_toggle` which sends a HTTP POST request to change the state of the LED.
 
-<h2>Physical ON/OFF button:</h2>
+#### Sunset/Sunrise:
 
-A tactile button is wired up to the Raspberry Pi. When the button is pressed, the state of the LED is changed through button.py.
-
-<h2>Virtual ON/OFF button:</h2>
-
-A Flask server running on the Raspberry Pi and hosts an interactive webpage which allows a user located in the LAN to switch the LED on/off by clicking on a light bulb image.
-
-When the image is clicked on, AJAX routes to the led_toggle function which sends a HTTP POST request to change the state of the LED.
-
-<h2>Sunset/Sunrise:</h2>
-
-The level of natural light that in a room will vary all year round as the sun is rising and setting at different times each day.
-As a result, the period each day when artificial light is required will vary.
-The time of the sunrise and sunset are found using a pre-existing program called 'Sunwait' (https://github.com/risacher/sunwait).
-Cron jobs are used to monitor when the sun has risen or set.
+The time of the sunrise and sunset are found using [Sunwait](https://github.com/risacher/sunwait). Cron jobs are used to monitor when the sun has risen or set.
 
 crontab entries:
-
+```
 */5 * * * * sunwait sun up 51.886661N 8.618732W ; python /home/pi/development/smart-lighting-app/light_on.py
-
 */5 * * * * sunwait sun down 51.886661N 8.618732W ; python /home/pi/development/smart-lighting-app/light_off.py
+```
 
-<h2>MQTT:</h2>
+#### MQTT:
 
 An MQTT broker can be used to change the state of the LED.
 
-With led_sub.py running on the RPI, an MQTT payload can be published from any device with an "ON" or "OFF" message. The MQTT broker sends this to the subscriber (the RPI) which in turn switches the LED on/off.
+With `led_sub.py` running on the Pi, an MQTT payload can be published from any device with an  `ON` or `OFF` message. The MQTT broker sends this to the subscriber (the Pi) which in turn switches the LED on/off.
+
+## Technologies
+
+- Raspberry Pi 3 Model B+, LED, tactile button
+- HTTP, MQTT
+- Flask
+- [Sunwait](https://github.com/risacher/sunwait)
+- HTML, CSS, AJAX, Python
+- Cron
+
+## Usage
+
+(Note: Aside from the cronjob for changing the LED state, the other three methods must be run independently and do not function simultaneously.)
+
+Ensure the  Pi circuit is wired correctly:
+-  Button is wired to **pin 22**
+-  LED is wired to **pin 18**
+
+![pi-wiring-img](image/pi-wiring.png)
+
+```
+# Clone the repository:
+$ git clone https://github.com/TonyN96/smart-lighting-app.git
+
+# Go into the repository
+cd smart-lighting-app
+```
+
+##### Tactile button:
+
+Run the `button.py` file
+```
+python button.py
+```
+
+##### Virtual button:
+
+Run the `app.py` file to run the Flask server
+```
+python app.py
+```
+Visit `localhost:4000`
+
+##### MQTT:
+
+Run `led_sub.py` file with your MQTT broker URL
+
+```
+python led_sub.py mqtt://broker.hivemq.com:1883/YOUR_ID/home
+```
+
+Publish to the MQTT broker with `ON` or `OFF` as message payload. This can be done from another device, or `led_pub.py` can be used in a new terminal. Replace URL with your broker URL and replace `MESSAGE` with `ON` or `OFF`.
+
+```
+python leb_pub.py mqtt://broker.hivemq.com:1883/YOUR_ID/home MESSAGE
+```
